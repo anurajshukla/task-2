@@ -1,23 +1,21 @@
-import logo from './logo.svg';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import Login from './pages/Login';
+import Account from './pages/Account';
 
 function App() {
+  const [authenticated, setAuthenticated] = useState(false);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route path='/' element={<Login setAuthenticated={setAuthenticated} />} />
+        <Route
+          path="/account"
+          element={authenticated ? <Account /> : <Navigate to="/" />}
+        />
+      </Routes>
     </div>
   );
 }
